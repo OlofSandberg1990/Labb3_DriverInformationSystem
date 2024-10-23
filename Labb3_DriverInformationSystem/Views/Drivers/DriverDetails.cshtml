@@ -1,0 +1,33 @@
+﻿@model Labb3_DriverInformationSystem.Models.Driver
+
+<div class="container">
+    <h2>Förardetaljer för @Model.Name</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">Namn:</dt>
+                <dd class="col-sm-8">@Model.Name</dd>
+
+                <dt class="col-sm-4">Körkortsnummer:</dt>
+                <dd class="col-sm-8">@Model.LicenseNumber</dd>
+
+                <dt class="col-sm-4">Telefonnummer:</dt>
+                <dd class="col-sm-8">@Model.PhoneNumber</dd>
+
+                <dt class="col-sm-4">Ansvarig Person:</dt>
+                <dd class="col-sm-8">@Model.Employee.Name</dd>
+
+                <dt class="col-sm-4">Lön:</dt>
+                <dd class="col-sm-8">@Model.Salary.ToString("C")</dd>
+
+                <dt class="col-sm-4">Antal Händelser:</dt>
+                <dd class="col-sm-8">@Model.Events?.Count()</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-primary">Tillbaka till förare</a>
+    </div>
+</div>

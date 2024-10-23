@@ -1,0 +1,32 @@
+﻿@model Labb3_DriverInformationSystem.Models.Employee
+
+<div class="container">
+    <h2>Detaljer om @Model.Name</h2>
+    <dl class="row">
+        <dt class="col-sm-2">Namn</dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+
+        <dt class="col-sm-2">Telefonnummer</dt>
+        <dd class="col-sm-10">@Model.Phonenumber</dd>
+
+        <dt class="col-sm-2">Anställningsdatum</dt>
+        <dd class="col-sm-10">@Model.DateOfHire.ToShortDateString()</dd>
+    </dl>
+
+    <h4>Ansvar för följande förare:</h4>
+    @if (Model.Drivers != null && Model.Drivers.Any())
+    {
+        <ul>
+            @foreach (var driver in Model.Drivers)
+            {
+                <li style="list-style-type: none;">@driver.Name (Reg. nummer: @driver.LicenseNumber)</li>
+            }
+        </ul>
+    } else
+    {
+        <p>Inga förare är kopplade till denna anställd.</p>
+    }
+
+    <a asp-action="Edit" asp-route-id="@Model.EmployeeId" class="btn btn-primary">Redigera</a>
+    <a asp-action="Index" class="btn btn-secondary">Tillbaka till listan</a>
+</div>

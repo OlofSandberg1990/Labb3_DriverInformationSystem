@@ -1,0 +1,35 @@
+﻿@model Labb3_DriverInformationSystem.Models.Event
+
+<div class="container">
+    <h2>Skapa ny händelse</h2>
+
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="Title">Titel</label>
+            <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" />
+        </div>
+        <div class="form-group mt-3">
+            <label for="Description">Beskrivning</label>
+            <input type="text" class="form-control" id="Description" name="Description" value="@Model.Description" />
+        </div>
+        <div class="form-group mt-3">
+            <label for="EventDate">Datum</label>
+            <input type="datetime-local" class="form-control" id="EventDate" name="EventDate" value="@Model.EventDate.ToString("yyyy-MM-ddTHH:mm")" />
+        </div>
+        <div class="form-group mt-3">
+            <label for="Income">Inkomst</label>
+            <input type="number" class="form-control" id="Income" name="Income" value="@Model.Income" />
+        </div>
+        <div class="form-group mt-3">
+            <label for="Expense">Kostnad</label>
+            <input type="number" class="form-control" id="Expense" name="Expense" value="@Model.Expense" />
+        </div>
+        <div class="form-group mt-3">
+            <label for="DriverId">Förare</label>
+            <select class="form-control" asp-for="DriverId" asp-items="ViewBag.DriverId"></select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Skapa</button>
+        <a asp-action="Index" class="btn btn-secondary mt-3">Tillbaka till listan</a>
+    </form>
+</div>

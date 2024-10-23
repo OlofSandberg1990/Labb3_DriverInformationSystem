@@ -1,0 +1,41 @@
+﻿@model Labb3_DriverInformationSystem.Models.Employee
+
+@{
+    ViewData["Title"] = "Ta bort anställd";
+}
+
+<h1>Ta bort anställd</h1>
+
+<h3>Är du säker på att du vill ta bort denna anställd?</h3>
+
+<!-- Om det finns ett felmeddelande, visa det här -->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<div class="container">
+    <h4>Anställd information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Namn</dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+
+        <dt class="col-sm-2">Telefonnummer</dt>
+        <dd class="col-sm-10">@Model.Phonenumber</dd>
+
+        <dt class="col-sm-2">Anställningsdatum</dt>
+        <dd class="col-sm-10">@Model.DateOfHire.ToShortDateString()</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EmployeeId" />
+        <input type="submit" value="Ta bort" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Tillbaka till listan</a>
+    </form>
+</div>

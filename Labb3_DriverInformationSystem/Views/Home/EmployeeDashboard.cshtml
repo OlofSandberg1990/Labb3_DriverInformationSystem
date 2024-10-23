@@ -1,0 +1,27 @@
+﻿@model Labb3_DriverInformationSystem.Models.Employee
+
+@{
+    ViewData["Title"] = "Employee Dashboard";
+}
+
+<h2>Employee Dashboard</h2>
+<p>Välkommen, <strong>@Model.Name!</strong></p>
+
+<div class="dashboard-options">
+    <a href="@Url.Action("Index", "Drivers")" class="dashboard-link">
+        <div class="dashboard-item">
+            <i class="fas fa-car icon"></i>
+            <span>Hantera Förare</span>
+        </div>
+    </a>
+    <a href="@Url.Action("Index", "Events")" class="dashboard-link">
+        <div class="dashboard-item">
+            <i class="fas fa-calendar-alt icon"></i>
+            <span>Hantera Händelser</span>
+        </div>
+    </a>
+</div>
+
+<div class="recent-events mt-4">
+    <a href="@Url.Action("RecentEvents", "Events")" class="btn btn-info">Visa senaste händelser</a>
+</div>

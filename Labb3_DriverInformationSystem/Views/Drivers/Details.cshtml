@@ -1,0 +1,60 @@
+﻿@model Labb3_DriverInformationSystem.Models.Driver
+
+<div class="container mt-4">
+    <h2>Händelser för @Model.Name</h2>
+
+    <!-- Form för sökning och filtrering -->
+    <form asp-action="Details" method="get" class="mb-4">
+        <div class="form-group">
+            <label for="searchQuery">Sök efter händelse:</label>
+            <input type="text" id="searchQuery" name="searchQuery" class="form-control" value="@ViewData["SearchQuery"]" />
+        </div>
+        <div class="form-group">
+            <label for="fromDate">Från datum:</label>
+            <input type="date" id="fromDate" name="fromDate" class="form-control" value="@ViewData["FromDate"]" />
+        </div>
+        <div class="form-group">
+            <label for="toDate">Till datum:</label>
+            <input type="date" id="toDate" name="toDate" class="form-control" value="@ViewData["ToDate"]" />
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Sök</button>
+        <a asp-action="Details" asp-route-id="@Model.DriverId" class="btn btn-secondary mt-2">Återställ</a>
+    </form>
+
+    <!-- Sammanfattning av belopp -->
+    <div class="mt-4">
+        
+        <p class="belopp-in" style="font-size: 1.5rem; color: green;">
+            Belopp In: @Model.Events.Sum(e => e.Income ?? 0).ToString("N0")
+        </p>
+        <p class="belopp-ut" style="font-size: 1.5rem; color: red;">
+            Belopp Ut: @Model.Events.Sum(e => e.Expense ?? 0).ToString("N0")
+        </p>
+    </div>
+
+    <!-- Lista över händelser -->
+    <ul class="list-group">
+        @foreach (var eventItem in Model.Events)
+        {
+            <li class="list-group-item mb-3">
+                <h4>
+                    <a asp-controller="Events" asp-action="Details" asp-route-id="@eventItem.EventId">
+                        @eventItem.Title
+                    </a>
+                </h4>
+                <p>@eventItem.Description</p>
+                <p>Datum: @eventItem.EventDate.ToString("yyyy-MM-dd")</p>
+                @if (eventItem.Expense.HasValue)
+                {
+                    <p>Utgift: @eventItem.Expense.Value.ToString("C")</p>
+                }
+                @if (eventItem.Income.HasValue)
+                {
+                    <p>Inkomst: @eventItem.Income.Value.ToString("C")</p>
+                }
+            </li>
+        }
+    </ul>
+
+    <a class="btn btn-primary mt-4" asp-action="Index">Tillbaka till förare</a>
+</div>

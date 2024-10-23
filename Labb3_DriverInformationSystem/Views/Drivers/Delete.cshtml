@@ -1,0 +1,49 @@
+﻿@model Labb3_DriverInformationSystem.Models.Driver
+
+@{
+    ViewData["Title"] = "Ta bort";
+}
+
+<h1>Ta bort förare</h1>
+
+<h3>Är du säker på att du vill ta bort denna förare?</h3>
+<div class="container mt-4">
+    <dl class="row">
+        <dt class="col-sm-3">
+            Namn
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-3">
+            Körkortsnummer
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.LicenseNumber)
+        </dd>
+        <dt class="col-sm-3">
+            Telefonnummer
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-3">
+            Lön
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+        <dt class="col-sm-3">
+            Ansvarig person
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Employee.Name)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="DriverId" />
+        <input type="submit" value="Ta bort" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-secondary">Tillbaka till listan</a>
+    </form>
+</div>

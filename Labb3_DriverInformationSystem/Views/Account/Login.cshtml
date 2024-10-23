@@ -1,0 +1,26 @@
+﻿@model LogInViewModel
+
+<form asp-action="Login" method="post" class="container">
+    <div class="form-group">
+        <label for="Email">E-post</label>
+        <input type="text" id="Email" name="Email" asp-for="Email" class="form-control" placeholder="Ange din e-postadress" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-3">
+        <label for="Password">Lösenord</label>
+        <input type="password" id="Password" name="Password" asp-for="Password" class="form-control" placeholder="Ange ditt lösenord" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Logga in</button>
+</form>
+
+<div class="alert alert-info mt-4" role="alert">
+    <h4>Testinloggningar:</h4>
+    <p><strong>Admin</strong></p>
+    <p>E-post: admin@test.com</p>
+    <p>Lösenord: admin</p>
+    <br />
+    <p><strong>Anställd</strong></p>
+    <p>E-post: petter@emp.com</p>
+    <p>Lösenord: test</p>
+</div>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Labb3_DriverInformationSystem.Models.Driver>
+
+<div class="container">
+    <h2>Förare</h2>
+
+    <!-- Switch för att visa alla förare eller bara mina (om man inte är Admin) -->
+    @if (!User.IsInRole("Admin"))
+    {
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="toggleAllDrivers" name="showAll" @(ViewBag.ShowAll ? "checked" : "")>
+            <label class="form-check-label" for="toggleAllDrivers">Visa alla förare</label>
+        </div>
+    }
+
+    <form asp-action="Index" method="get" class="mb-3">
+        <div class="form-group">
+            <input type="text" name="searchString" class="form-control" placeholder="Sök efter förare" value="@ViewBag.CurrentFilter" />
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="fromDate">Från datum</label>
+                <input type="date" id="fromDate" name="fromDate" class="form-control" value="@ViewData["FromDate"]" />
+            </div>
+            <div class="col-md-6">
+                <label for="toDate">Till datum</label>
+                <input type="date" id="toDate" name="toDate" class="form-control" value="@ViewData["ToDate"]" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Sök</button>
+        <a asp-action="Index" class="btn btn-secondary mt-3">Rensa sökning</a>
+        <div class="d-flex justify-content-between mb-3">
+            <a asp-action="Create" class="btn btn-success mb-4">Ny Förare</a>
+        </div>
+    </form>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning mt-3">
+            Inga förare hittades.
+        </div>
+    }
+
+    <div class="row mt-4">
+        @foreach (var driver in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 p-3">
+                    <div class="card-body">
+                        <!-- Ikoner högst upp till vänster och höger -->
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <a asp-action="DriverDetails" asp-route-id="@driver.DriverId" class="card-information" title="Detaljer om @driver.Name">
+                                <i class="fas fa-info-circle fa-lg text-primary"></i>
+                            </a>
+                            <a asp-action="Create" asp-controller="Events" asp-route-driverId="@driver.DriverId" class="btn btn-circle btn-outline-success" title="Lägg till händelse">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+
+                        <h5 class="card-title mb-2">@driver.Name</h5>
+                        <p class="card-text text-muted mb-1">Reg.nummer: @driver.LicenseNumber</p>
+                        <p class="card-text text-muted mb-1">Ansvarig Person: @driver.Employee.Name</p>
+                        <p class="card-text text-muted mb-3">Antal Händelser: @(driver.Events?.Count() ?? 0)</p>
+
+                        <div>
+                            <p><strong>Belopp In:</strong> <span style="color: green;">@driver.TotalIncome</span></p>
+                            <p><strong>Belopp Ut:</strong> <span style="color: red;">@driver.TotalExpense</span></p>
+                        </div>
+
+                        <!-- Knappar längst ner i kortet -->
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Details" asp-route-id="@driver.DriverId" class="btn btn-sm btn-info">Detaljer</a>
+                            <a asp-action="Edit" asp-route-id="@driver.DriverId" class="btn btn-sm btn-warning">Redigera</a>
+                            <a asp-action="Delete" asp-route-id="@driver.DriverId" class="btn btn-sm btn-danger">Ta bort</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#toggleAllDrivers').change(function () {
+            if ($(this).prop('checked')) {
+                window.location.href = '@Url.Action("Index", "Drivers")?showAll=true';
+            } else {
+                window.location.href = '@Url.Action("Index", "Drivers")?showAll=false';
+            }
+        });
+    });
+</script>

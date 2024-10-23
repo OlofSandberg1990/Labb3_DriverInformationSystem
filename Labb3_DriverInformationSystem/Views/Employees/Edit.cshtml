@@ -1,0 +1,34 @@
+﻿@model EmployeeViewModel
+
+<h2>Redigera Anställd</h2>
+
+<form asp-action="Edit" method="post" class="container">
+    <input type="hidden" asp-for="EmployeeId" />
+    <div class="form-group">
+        <label asp-for="Name">Namn</label>
+        <input asp-for="Name" class="form-control" placeholder="Skriv in namn" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-3">
+        <label asp-for="Phonenumber">Telefonnummer</label>
+        <input asp-for="Phonenumber" class="form-control" placeholder="Skriv in telefonnummer" />
+        <span asp-validation-for="Phonenumber" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-3">
+        <label asp-for="DateOfHire">Anställningsdatum</label>
+        <input asp-for="DateOfHire" type="date" class="form-control" />
+        <span asp-validation-for="DateOfHire" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-3">
+        <label asp-for="Email">E-post</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-3">
+        <label asp-for="Password">Lösenord</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Spara</button>
+    <a asp-action="Index" class="btn btn-secondary">Tillbaka till listan</a>
+</form>

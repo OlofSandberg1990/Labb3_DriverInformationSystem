@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Labb3_DriverInformationSystem.Models.Event>
+
+@{
+    string timeFrame = User.IsInRole("Admin") ? "senaste 24 timmarna" : "senaste 12 timmarna";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Notifikationer (senaste @timeFrame)</h2>
+
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Titel</th>
+                <th scope="col">Beskrivning</th>
+                <th scope="col">Datum</th>
+                <th scope="col">Förare</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ev in Model)
+            {
+                <tr>
+                    <td>@ev.Title</td>
+                    <td>@ev.Description</td>
+                    <td>@ev.EventDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@(ev.Driver != null ? ev.Driver.Name : "Ingen förare")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Index" class="btn btn-secondary">Till alla händelser</a>
+</div>

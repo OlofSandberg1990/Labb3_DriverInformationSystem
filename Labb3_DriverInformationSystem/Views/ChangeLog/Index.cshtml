@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Labb3_DriverInformationSystem.Models.ChangeLog>
+
+<h2>Ändringslogg</h2>
+
+<form asp-action="Index" method="get" class="mb-4">
+
+    <div class="form-group">
+        <label for="searchEntityName">Entitetstyp</label>
+        <input type="text" id="searchEntityName" name="searchEntityName" class="form-control" placeholder="Sök efter entitetstyp (t.ex. Förare, Anställd)" value="@ViewData["SearchEntityName"]" />
+    </div>
+    <div class="form-group">
+        <label for="driverName">Förarnamn</label>
+        <input type="text" id="driverName" name="driverName" class="form-control" placeholder="Sök efter förarnamn" value="@ViewData["DriverName"]" />
+    </div>
+    <div class="form-group">
+        <label for="employeeName">Anställd namn</label>
+        <input type="text" id="employeeName" name="employeeName" class="form-control" placeholder="Sök efter anställdas namn" value="@ViewData["EmployeeName"]" />
+    </div>
+    <div class="form-group">
+        <label for="fromDate">Från:</label>
+        <input type="date" id="fromDate" name="fromDate" class="form-control" value="@ViewData["FromDate"]" />
+    </div>
+    <div class="form-group">
+        <label for="toDate">Till:</label>
+        <input type="date" id="toDate" name="toDate" class="form-control" value="@ViewData["ToDate"]" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Filtrera</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">Återställ filter</a>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Roll</th> 
+            <th>Namn</th> 
+            <th>Ändringstyp</th> 
+            <th>Beskrivning</th> 
+            <th>Ändrad av</th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var log in Model)
+        {
+            <tr>
+                <td>@log.ChangeDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@(log.EntityName == "Driver" ? "Förare" : "Anställd")</td>
+                <td>@log.AffectedName</td>
+                <td>@(log.ChangeType == "Update" ? "Uppdatering" : log.ChangeType)</td>
+                <td>@log.ChangeDescription</td>
+                <td>@log.ChangedBy</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" asp-controller="Home" class="btn btn-secondary mt-4">Tillbaka till startsidan</a>
