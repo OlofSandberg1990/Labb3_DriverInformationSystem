@@ -109,8 +109,6 @@ namespace Labb3_DriverInformationSystem.Services
 
 
 
-
-
         // Hämta alla ändringsloggar
         public async Task<List<ChangeLog>> GetAllChangeLogsAsync()
         {

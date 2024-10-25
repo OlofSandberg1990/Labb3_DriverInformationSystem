@@ -20,19 +20,5 @@ namespace Labb3_DriverInformationSystem.Services
                 .CountAsync();
         }
 
-        //// Markera alla notifikationer som lästa för användaren
-        //public async Task MarkNotificationsAsReadAsync(string userId)
-        //{
-        //    var notifications = await _context.UserNotifications
-        //        .Where(un => un.UserId == userId && !un.IsRead)
-        //        .ToListAsync();
-
-        //    foreach (var notification in notifications)
-        //    {
-        //        notification.IsRead = true;
-        //    }
-
-        //    await _context.SaveChangesAsync();
-        //}
     }
 }

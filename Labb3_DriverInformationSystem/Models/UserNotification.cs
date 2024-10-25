@@ -11,7 +11,7 @@ namespace Labb3_DriverInformationSystem.Models
         public string UserId { get; set; } 
 
         [Required]
-        public int EventId { get; set; } //Koppling till Event
+        public int EventId { get; set; }
 
         public bool IsRead { get; set; } = false; //Standardvärde är att notifikationen är oläst
 

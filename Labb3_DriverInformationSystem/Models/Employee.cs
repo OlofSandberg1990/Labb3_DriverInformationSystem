@@ -21,7 +21,7 @@ namespace Labb3_DriverInformationSystem.Models
 
         public IdentityUser IdentityUser { get; set; }
 
-        //One-to-many relation to Driver
+        //One-to-many relation till Driver
         public ICollection<Driver> Drivers { get; set; }
     }
 }

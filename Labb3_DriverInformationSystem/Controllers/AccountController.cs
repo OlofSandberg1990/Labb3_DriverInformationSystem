@@ -58,7 +58,7 @@ namespace Labb3_DriverInformationSystem.Controllers
             return View(model);
         }
 
-
+        // GET: Account/Logout
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

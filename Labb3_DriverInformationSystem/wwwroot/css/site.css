@@ -215,6 +215,28 @@ h2 {
     color: #fff;
 }
 
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-label {
+    margin-left: 0.5rem; 
+    font-size: 1.5rem; 
+}
+
+/*Add shadow*/
+/*Add shadow*/
+.form-check-input {
+    font-size: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.form-check-input{
+    font-size: 1.5rem;
+    
+}
+
+
 /* Ikon för detaljer */
 .card-information {
     font-size: 1.3rem;
